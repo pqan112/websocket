@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.io</title>
+</head>
+
+<body>
+  <h1>Socker.io client</h1>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module">
+    const socket = io()
+
+    socket.on("connect", (client) => {
+      console.log("connected to (client) ✅")
+
+      // Disconnect from server after 5 seconds
+      // setTimeout(() => {
+      //   socket.disconnect()
+      // }, 5000)
+    })
+
+    socket.on("message", (message) => {
+      console.log(message)
+    })
+
+    socket.emit("new message", "this is a new message from the client")
+
+    // in case crash server
+    socket.on("disconnect", () => {
+      console.log("user disconnected from (server) ❌")
+    })
+  </script>
+</body>
+
+</html>
